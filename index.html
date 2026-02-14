@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Valentine’s 💌</title>
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body>
+
+  <!-- (Optional) floating hearts canvas, keep if you want -->
+
+  <canvas id="hearts"></canvas>
+
+  <div class="container">
+  
+
+    <div class="envelope-wrapper">
+      <div class="envelope">
+        <div class="letter">
+          <div class="text">
+      <div class="envelope-letter" id="letter" >
+        <div>
+          <div class="letter-top">
+            <p class="ltr">Hola Ash,<p>
+            <p class="ltr">
+I made you a little Valentine that I hope makes you smile today. I’ve really enjoyed the time we’ve spent together, and I’m really looking forward to tomorrow.
+</p>
+<div class="ltr">(Also… I may or may not have coded this for you 😅)</div>
+<p class="ltr">Happy Valentine’s Day,</p>
+          </div>
+          <div class="letter-body">
+                      <div class="letter-footer" class="ltr">— B</div>
+            <div class="actions">
+              <button id="openCardBtn" type="button">
+                Click for More
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+          </div>
+        </div>
+
+      </div>
+      <div class='heart'></div>
+     
+
+    </div>
+    
+  </div>
+     
+
+  <main class="stage">
+ 
+    
+<!-- Backdrop -->
+<div class="backdrop hidden" id="backdrop"></div>
+
+<section class="card modal hidden" id="card" role="dialog" aria-modal="true" aria-labelledby="cardTitle">
+  <button class="modal-close" id="closeCardBtn" type="button" aria-label="Close">×</button>
+
+  <div class="actions">
+   <button class="btn primary " id="babyBtn" type="button">
+    Click for proof I’ve always been cute
+  </button>
+     </div>
+<div class="actions">
+<div class="reveal hidden" id="babyReveal">
+    <img class="baby-pic"
+      src="IMG_7910.jpg"
+      alt="Baby Beverly"
+      class="baby-pic"
+    />
+  </div>
+</div>
+  
+ 
+
+
+<div class= "actions">
+        <div>Still interested? 🥺</div>
+</div>
+  <div class="actions">
+    <button class="btn primary" id="yesBtn" type="button">Yes 💖</button>
+    <button class="btn ghost" id="noBtn" type="button">No 🙃</button>
+  </div>
+
+  <p class="tiny" id="noText"></p>
+
+  <div class="divider"></div>
+
+  <!-- Optional mini-survey -->
+  <h3 class="miniTitle">Mini survey ✨</h3>
+
+  <form id="surveyForm" class="survey"
+        action="https://formspree.io/f/xwvnvbnl"
+        method="POST">
+
+  
+
+     <div class="pill-group" data-name="excitement">
+  <p class="pill-label">How excited are you for tomorrow?</p>
+
+  <div class="pills" role="radiogroup" aria-label="How excited are you for tomorrow">
+    <button class="pill" type="button" data-value="7">7/10 mysterious</button>
+   <button class="pill" type="button" data-value="8">8/10</button>
+    <button class="pill" type="button" data-value="9">9/10 🧸</button>
+    <button class="pill" type="button" data-value="10">10/10 no chill✨</button>
+  </div>
+
+  <!-- This is what actually gets submitted to Formspree -->
+  <input type="hidden" name="energy" id="energyInput" required />
+</div>
+
+        <label>
+          Send me a little note:
+          <textarea class="box"
+          name="message" 
+          rows="3" 
+          maxlength="300" 
+          placeholder=""
+          required
+        ></textarea>
+        </label> 
+
+         <!-- Optional extras for Formspree --> 
+         <input type="hidden" name="_subject" value="Valentine Survey 💌" />
+
+  <div class="actions">
+    <button class="btn primary" type="submit">Send</button>
+  </div>
+      </form>
+      </section> 
+
+    </container> 
+
+    <!-- Card (hidden at first) -->
+     <p class="page-hint" id="hint">
+  Tap the heart to open
+</p>
+  </main>
+ 
+
+
+  <script src="script.js"></script>
+</body>
+</html>

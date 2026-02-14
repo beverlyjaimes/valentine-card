@@ -1,0 +1,383 @@
+
+:root{
+  --primary: white;
+  --bg-color: #fad0c4;
+  --bg-envelope-color:#fad0c4;
+  --envelope-tab: #ff9a9e;
+  --envelope-cover: #ff6b81;
+  --shadow-color: #1c1c1c;
+  --heart-color: #c2465d;
+}
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+
+  /* position: relative;
+  z-index: 2; */
+}
+
+/* Backdrop behind the card */
+.backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.25);
+  z-index: 19;
+}
+
+/* Modal card sits on top of envelope */
+.card.modal{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  margin: 0; /* important so it doesn't push layout */
+  max-height: min(80vh, 720px);
+  overflow: auto;
+}
+
+
+/* Close button */
+.modal-close{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: .6;
+}
+.modal-close:hover{ opacity: 1; }
+
+/* Your existing hidden class is fine */
+.hidden{ display:none; }
+
+.container > .envelope-wrapper {
+  background: var(--bg-envelope-color);
+  box-shadow: 0 0 40px var(--shadow-color);
+}
+.envelope-wrapper > .envelope {
+  position: relative;
+  width: 350px;
+  height: 250px;
+}
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  border-top: 130px solid var(--envelope-tab);
+  border-right: 175px solid transparent;
+  border-left: 175px solid transparent;
+  transform-origin: top;
+  transition: all 0.5s ease-in-out 0.7s;
+}
+.envelope::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 0px;
+  height: 0px;
+  border-top: 130px solid transparent;
+  border-right: 175px solid var(--envelope-cover);
+  border-bottom: 125px solid var(--envelope-cover);
+  border-left: 175px solid var(--envelope-cover);
+}
+.sincerely {
+  text-align: right;
+}
+
+.envelope > .letter {
+  position: absolute;
+  right: 20%;
+  bottom: 0;
+  width: 54%;
+  height: 80%;
+  background: var(--primary);
+  text-align: center;
+  transition: all 1s ease-in-out;
+  padding: 20px 10px;
+}
+
+.envelope > .letter > .text {
+  font-family: "Caveat", cursive;
+  font-style: normal;
+  color: var(--txt-color);
+  text-align: justify;
+  font-size: 10px;
+  padding-right: 2px;
+}
+
+.ltr{
+  margin:1px;
+}
+.text strong {
+  font-size: 12px;
+}
+
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  background: var(--heart-color);
+  z-index: 4;
+  transform: translate(-50%, -20%) rotate(45deg);
+  transition: transform 0.5s ease-in-out 1s;
+  box-shadow: 0 1px 6px var(--shadow-color);
+  cursor: pointer;
+}
+.heart:before, 
+.heart:after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: var(--heart-color);
+  border-radius: 50%;
+}
+.heart:before {
+  top: -7.5px;
+}
+.heart:after {
+  right: 7.5px;
+}
+.flap > .envelope:before {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+.flap > .envelope > .letter {
+  bottom: 200px;
+  transform: scale(1.5);
+  transition-delay: 1s;
+}
+.flap > .heart {
+  transform: rotate(90deg);
+  transition-delay: 0.4s;
+}
+
+
+
+/* Optional hearts canvas (safe to keep even if you remove the JS) */
+#hearts{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  z-index:0;
+  pointer-events:none;
+}
+
+
+
+/* =========================
+   BUTTONS + CARD
+   ========================= */
+
+.btn{
+  border:1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.65);
+  color:var(--ink);
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.btn.primary{
+  background: rgba(255,107,129,.25);
+  border-color: rgba(255,107,129,.35);
+  
+}
+.btn.primary:hover{ filter: brightness(1.05); }
+.btn.ghost:hover{ background: rgba(255,255,255,.8); }
+
+/* Smaller cute button for the letter */
+#openCardBtn{
+  font-size: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,107,129,.45);
+  background: rgba(255,107,129,.15);
+  color: #c2465d;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  transition: all .18s ease;
+}
+
+/* Hover effect */
+#openCardBtn:hover{
+  background: rgba(255,107,129,.28);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.12);
+}
+
+/* Click effect */
+#openCardBtn:active{
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+.card{
+  width:min(540px, 92vw);
+  background: rgba(255,255,255,.95);
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:18px;
+  padding:18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.14);
+  position:relative;
+  z-index:10;
+  margin-top: 10px;
+}
+
+.hidden{ display:none; }
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:12px;
+}
+
+.tiny{
+  font-size:12px;
+  color:rgba(0,0,0,.62);
+  margin-top:10px;
+  text-align:center;
+}
+
+.divider{
+  height:1px;
+  background: rgba(0,0,0,.12);
+  margin:16px 0;
+}
+
+.miniTitle{
+  margin:0 0 8px;
+  font-size:16px;
+}
+
+.survey{
+  display:grid;
+  gap:10px;
+}
+
+label{
+  display:grid;
+  gap:6px;
+  font-size:13px;
+  color:rgba(0,0,0,.75);
+}
+
+select, input{
+  /* width:100%; */
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.9);
+  outline:none;
+}
+
+/* Baby pic proof */
+
+/* make the button smaller/cuter */
+.btn.mini{
+  font-size: 12.5px;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+/* reveal container */
+.reveal{
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(6px);
+  transition: max-height .35s ease, opacity .25s ease, transform .25s ease;
+}
+
+.reveal.show{
+  max-height: 600px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.baby-pic{
+  display:block;
+  width:min(150px, 70vw);
+  height:auto;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 10px 22px rgba(0,0,0,.12);
+}
+
+.pill-group{
+  display: grid;
+  gap: 8px;
+}
+
+.pill-label{
+  margin: 0;
+  font-size: 13px;
+  color: rgba(0,0,0,.75);
+  font-weight: 600;
+}
+
+.pills{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill{
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.7);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+}
+
+.pill:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.10);
+}
+
+.pill.selected{
+  background: rgba(255,107,129,.20);
+  border-color: rgba(255,107,129,.45);
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+}
+
+.page-hint{
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(0,0,0,.55);
+  font-family: "Caveat", cursive;
+  letter-spacing: .3px;
+  animation: hintFade 2.5s ease-in-out infinite alternate;;
+}
